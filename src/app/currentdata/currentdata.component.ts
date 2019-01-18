@@ -22,5 +22,4 @@ export class CurrentdataComponent implements OnInit {
   notrades:string ="18";
   totalturnover:string = "842,452";
   delieverquantity:string="99,700";
-
 }

@@ -9,6 +9,8 @@ import { AppService } from '../app.service';
 //import { catchError, map, tap } from 'rxjs/operators';
 
 declare var google: any;
+declare var $: any;
+
 
 @Component({
   selector: 'app-stocks',
@@ -18,20 +20,48 @@ declare var google: any;
 })
 export class StocksComponent implements OnInit {
 
+  showCompanyGraph: boolean = false;
+  showCompanyCurrentData: boolean = true;
+  showDiv: boolean = false;
+
+  options = {
+    url: "../assets/data/compList.json",
+  
+    getValue: "name",
+  
+    template: {
+        type: "description",
+        fields: {
+            description: "email"
+        }
+    },
+  
+    list: {
+        match: {
+            enabled: true
+        }
+    },
+  
+    theme: "plate-dark"
+  };
 
   constructor(private http: HttpClient, private appService: AppService) {
     this.showCompaniesList();
+    $("#seachCompanyName").easyAutocomplete(this.options);
+
   }
+
+  
 
   ngOnInit() {
   }
+
 
   searchRequestForm = new FormGroup({
     seachCompanyName: new FormControl('')
   });
 
   showCompanyData(CompanyName: any) {
-    this.loadChart();
     /*this.appService.showCompanyData().subscribe(Compnieslist => {
       console.log(Compnieslist);
   });*/
@@ -94,23 +124,45 @@ export class StocksComponent implements OnInit {
     };
 
     var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+    google.visualization.events.addListener(chart, 'select', function(){
+      this.speakGraph();
+    });
+
 
     chart.draw(data, options);
+  }
+
+  speakGraph(){
+    var msg = new SpeechSynthesisUtterance('');
+    window.speechSynthesis.speak(msg);
   }
 
   loadChart() {
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(this.drawChart);
 
-  }
-
-  showCurrentData(){
 
   }
-  
-  showGraph(){
 
+
+  showContainer(){
+    this.showDiv = true;
   }
+
+  showCurrentData() {
+    this.showCompanyGraph = false;
+    this.showCompanyCurrentData = true;
+  }
+
+  showGraph() {
+    this.showCompanyGraph = true;
+    this.showCompanyCurrentData = false;
+    this.loadChart();
+  }
+
+
+
+
 
 
 }

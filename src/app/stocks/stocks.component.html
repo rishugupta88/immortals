@@ -7,10 +7,10 @@
         <div class="input-group-addon">
           <i class="fa fa-building"></i>
         </div>
-        <input type="text" class="form-control" formControlName="seachCompanyName" placeholder="Enter Company Name to Search..."
+        <input type="text" id="seachCompanyName" class="form-control" formControlName="seachCompanyName" placeholder="Enter Company Name to Search..."
           data-toggle="tooltip" data-placement="top" title="Enter Company Name to Search...">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-success">Go!</button>
+          <button type="submit" class="btn btn-success" (click)="showContainer()" style="height: 50px;">Go!</button>
         </span>
 
       </div>
@@ -20,27 +20,28 @@
 
 
 
-<div class="row bodyView">
-    <div class="col-sm-12 col-md-12">
-      <div class="thumbnail">
-        <div class="caption">
+<div class="row bodyView" *ngIf="showDiv">
+  <div class="col-sm-12 col-md-12">
+    <div class="thumbnail">
+      <div class="caption">
+        <p>
+          <a class="btn btn-success" role="button" (click)="showCurrentData()">CURRENT DATA</a>
+          <a class="btn btn-primary" style="margin-left: 10px;" role="button" (click)="showGraph()">GRAPH VIEW</a>
+        </p>
+        <div *ngIf="showCompanyCurrentData">
           <h3>Current Data</h3>
           <app-currentdata></app-currentdata>
-          <p>
-            <a href="#" class="btn btn-primary" role="button" (click)="showGraph()">GRAPH VIEW</a> 
-            <a href="#" class="btn btn-success" style="margin-left: 10px;" role="button" (click)="showCurrentData()">CURRENT DATA</a>
-          </p>
         </div>
+        <div align="center" *ngIf="showCompanyGraph">
+          <h3>Historical Data</h3>
+          <div id="chart_div" style="width: 800px; height: 400px;"></div>
+        </div>
+        
       </div>
     </div>
   </div>
+</div>
 
 
 
 
-
-
-
-
-
-<!-- ./Existing Customer Container -->
