@@ -1,11 +1,11 @@
 <!-- Existing Customer Container -->
 <form [formGroup]="searchRequestForm" (ngSubmit)="showCompanyData(searchRequestForm.value)" novalidate>
   <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
       <label>Search Company Name</label>
       <div class="input-group searchContainer">
         <div class="input-group-addon">
-          <i class="fa fa-mobile"></i>
+          <i class="fa fa-building"></i>
         </div>
         <input type="text" class="form-control" formControlName="seachCompanyName" placeholder="Enter Company Name to Search..."
           data-toggle="tooltip" data-placement="top" title="Enter Company Name to Search...">
@@ -17,5 +17,30 @@
     </div>
   </div>
 </form>
+
+
+
+<div class="row bodyView">
+    <div class="col-sm-12 col-md-12">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>Current Data</h3>
+          <app-currentdata></app-currentdata>
+          <p>
+            <a href="#" class="btn btn-primary" role="button" (click)="showGraph()">GRAPH VIEW</a> 
+            <a href="#" class="btn btn-success" style="margin-left: 10px;" role="button" (click)="showCurrentData()">CURRENT DATA</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
 
 <!-- ./Existing Customer Container -->
