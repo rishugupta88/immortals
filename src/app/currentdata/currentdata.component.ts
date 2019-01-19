@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-currentdata',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurrentdataComponent implements OnInit {
 
-  constructor() { }
+  companyName:string;
+
+  constructor(private appService :AppService) {
+    this.appService.readDbData().subscribe(data => {
+      console.log(data);
+  });
+
+   }
 
   ngOnInit() {
   }
